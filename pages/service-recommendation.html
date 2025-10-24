@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Інтерактивна платформа</title>
+
+    <!-- SEO Метатеги -->
+    <meta name="description"
+        content="Дізнайтеся про інтерактивну платформу WebStart Studio: як створювати ефективні онлайн-сервіси, навчальні та бізнес-платформи з інтерактивними функціями.">
+    <meta name="keywords"
+        content="інтерактивна платформа, онлайн-сервіс, веб-додаток, навчальна платформа, бізнес-платформа, веб-розробка">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://scintillating-sunshine-94e986.netlify.app/interactive-platform">
+
+    <!-- Канонічний URL -->
+    <link rel="canonical" href="https://scintillating-sunshine-94e986.netlify.app/service-recommendation.html">
+
+    <!-- Open Graph для соцмереж -->
+    <meta property="og:title" content="Інтерактивна платформа">
+    <meta property="og:description"
+        content="Дізнайтеся про інтерактивну платформу WebStart Studio: як створювати ефективні онлайн-сервіси та бізнес-платформи з інтерактивними функціями.">
+    <meta property="og:image" content="https://scintillating-sunshine-94e986.netlify.app/branding/banner.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://scintillating-sunshine-94e986.netlify.app/interactive-platform">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="uk_UA">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Інтерактивна платформа">
+    <meta name="twitter:description"
+        content="Дізнайтеся про інтерактивну платформу WebStart Studio: як створювати ефективні онлайн-сервіси та бізнес-платформи з інтерактивними функціями.">
+    <meta name="twitter:image" content="https://scintillating-sunshine-94e986.netlify.app/branding/banner.webp">
+
+    <link rel="stylesheet" href="../other_styles/service-recommendation.css">
+    <link rel="icon" type="image/webp" href="../branding/favicon-32x32.webp">
+    <link rel="alternate icon" type="image/png" href="../branding/favicon-32x32.png">
+</head>
+
+<body class="theme-interact-body">
+
+    <div class="theme-interact-main-container">
+        <h1 class="theme-interact-welcome-title">🚀 Ваші персоналізовані рекомендації чекають!</h1>
+        <p class="theme-interact-welcome-text">Тільки на нашій платформі ви можете дізнатися, які пропозиції і
+            можливості відповідають
+            вашим потребам. Пройдіть нашу вікторину і отримайте рекомендації!</p>
+        <div class="theme-interact-guide-info">
+            <img src="../foto/djon.webp" alt="Djon" class="theme-interact-guide-photo">
+            <p class="theme-interact-guide-text">З повагою, Ваш особистий гід, Djon</p>
+        </div>
+    </div>
+
+    <div id="quiz-section" class="theme-interact-quiz-container">
+        <h2>Дізнайтеся, яка пропозиція найкраще підходить для вас!</h2>
+        <form id="quiz-form">
+            <div class="theme-interact-question">
+                <label>Що вам найбільше потрібно?</label><br>
+                <input type="radio" id="landing" name="service" value="landing">
+                <label for="landing">Лендінг</label><br>
+                <input type="radio" id="resume" name="service" value="resume">
+                <label for="resume">Резюме</label><br>
+                <input type="radio" id="banners" name="service" value="banners">
+                <label for="banners">Портфоліо</label><br>
+            </div>
+            <div class="theme-interact-question">
+                <label>Як швидко вам потрібно?</label><br>
+                <input type="radio" id="urgent" name="speed" value="urgent">
+                <label for="urgent">Терміново</label><br>
+                <input type="radio" id="normal" name="speed" value="normal">
+                <label for="normal">Не терміново</label><br>
+            </div>
+            <button type="submit" class="theme-interact-button">Дізнатися більше</button>
+        </form>
+
+        <div id="quiz-result" class="theme-interact-quiz-result theme-interact-hidden">
+            <h3>Ваш результат:</h3>
+            <p id="result-text"></p>
+            <button class="theme-interact-return-button" onclick="window.location.href='../index.html';">Повернутися на
+                головну</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('quiz-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let service = document.querySelector('input[name="service"]:checked').value;
+            let speed = document.querySelector('input[name="speed"]:checked').value;
+
+            let resultText = '';
+
+            if (service === 'landing') {
+                resultText = 'Ви шукаєте швидкий лендінг? Ми можемо створити чудовий односторінковий сайт!';
+            } else if (service === 'resume') {
+                resultText = 'Ми допоможемо створити професійне резюме, яке приверне увагу рекрутерів!';
+            } else if (service === 'banners') {
+                resultText = 'Наше портфоліо допоможе вам продемонструвати найкраще з ваших робіт!';
+            }
+
+            // Якщо вибрано терміново, додаємо повідомлення про більший час
+            if (speed === 'urgent') {
+                resultText += ' Вам знадобиться трохи більше часу для найкращого результату!';
+            }
+            // Якщо вибрано не терміново, додаємо повідомлення про пріоритет
+            else {
+                resultText += ' Ваша пропозиція буде оброблене в пріоритетному порядку!';
+            }
+
+            // Виведення результату
+            document.getElementById('result-text').innerText = resultText;
+            // *** ВАЖЛИВА ЗМІНА ***: Клас 'hidden' оновлено
+            document.getElementById('quiz-result').classList.remove('theme-interact-hidden');
+        });
+    </script>
+
+</body>
+
+</html>
