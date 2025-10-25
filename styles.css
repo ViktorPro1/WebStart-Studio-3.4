@@ -3841,3 +3841,75 @@ body.modal-open .help-window {
     color: #fff;
     text-decoration: none;
 }
+
+/*АВТОМАТИЧНИЙ ПОВОРОТ ЕКРАНУ */
+
+/* Плавний перехід між орієнтаціями */
+body,
+.container,
+h1,
+section {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Стилі для портретної орієнтації (вертикальне положення) */
+@media screen and (orientation: portrait) {
+    body.portrait-mode {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+}
+
+/* Стилі для альбомної орієнтації (горизонтальне положення) */
+@media screen and (orientation: landscape) {
+    body.landscape-mode {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    /* Збільшуємо шрифти в альбомному режимі */
+    h1 {
+        font-size: 3.5rem !important;
+    }
+}
+
+/* Індикатор поточної орієнтації */
+.orientation-indicator {
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 9998;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s;
+}
+
+@media screen and (orientation: portrait) {
+    .orientation-indicator {
+        background: rgba(102, 126, 234, 0.9);
+        color: white;
+    }
+
+    .orientation-indicator::before {
+        content: "📱 Портретний";
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .orientation-indicator {
+        background: rgba(240, 147, 251, 0.9);
+        color: white;
+    }
+
+    .orientation-indicator::before {
+        content: "🖥️ Альбомний";
+    }
+}
+
+/* Приховуємо індикатор */
+.orientation-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
