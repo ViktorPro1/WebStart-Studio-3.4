@@ -10,7 +10,6 @@ const urlsToCache = [
     "/scripts/pwa-loader.js",
     "/scripts/script.js",
     "/scripts/structured-data.js",
-    "/scripts/auto-rotation.js",
     "/icons/icon-192x192.webp",
     "/icons/icon-512x512.webp",
 
