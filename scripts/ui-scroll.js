@@ -10,7 +10,7 @@ const sectionNames = {
     'promo': 'Акції',
     'briefs': 'Отримати',
     'mini-services': 'Міні-сервіс',
-    'ai-prompting-dynamic': 'AI Промптинг',
+    'ai-prompting-dynamic': 'AI Сервіс',
     'extras': 'Додаткове',
     'testimonials': 'Відгуки',
     'faq': 'FAQ',

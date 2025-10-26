@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'техсервіс': 'technical-features', 'технічні можливості': 'technical-features',
             'переваги': 'advantages', 'чому ми': 'advantages', 'порівняння': 'platform-comparison',
             'пакети': 'pricing', 'ціни': 'pricing', 'акції': 'promo', 'отримати': 'briefs', 'бриф': 'briefs',
-            'міні-сервіс': 'mini-services', 'ai': 'ai-prompting-dynamic', 'ai промптинг': 'ai-prompting-dynamic',
+            'міні-сервіс': 'mini-services', 'ai': 'ai-prompting-dynamic', 'ai сервіс': 'ai-prompting-dynamic',
             'додаткове': 'extras', 'відгуки': 'testimonials', 'faq': 'faq', 'запитання': 'faq',
             'розміщення': 'hosting-help', 'хостинг': 'hosting-help', 'international': 'international',
             'блог': 'blog', 'новини': 'blog', 'контакти': 'contact-gift-wrapper', 'зв\'язок': 'contact-gift-wrapper',
