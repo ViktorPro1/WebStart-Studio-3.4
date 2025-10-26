@@ -12,6 +12,7 @@ const sectionNames = {
     'mini-services': 'Міні-сервіс',
     'ai-prompting-dynamic': 'AI Сервіс',
     'extras': 'Додаткове',
+    'certificate-gift': 'Сувенір',
     'testimonials': 'Відгуки',
     'faq': 'FAQ',
     'hosting-help': 'Розміщення',

@@ -268,8 +268,10 @@ document.addEventListener('DOMContentLoaded', () => {
             'додаткове': 'extras', 'відгуки': 'testimonials', 'faq': 'faq', 'запитання': 'faq',
             'розміщення': 'hosting-help', 'хостинг': 'hosting-help', 'international': 'international',
             'блог': 'blog', 'новини': 'blog', 'контакти': 'contact-gift-wrapper', 'зв\'язок': 'contact-gift-wrapper',
-            'бонус': 'guide-bonus', 'путівник': 'guide-bonus', 'соцмережі': 'social'
+            'бонус': 'guide-bonus', 'путівник': 'guide-bonus', 'соцмережі': 'social',
+            'сертифікат': 'certificate-gift', 'сувенір': 'certificate-gift'
         };
+
 
         searchForm.addEventListener('submit', e => {
             e.preventDefault();
