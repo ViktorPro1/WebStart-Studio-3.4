@@ -1,4 +1,4 @@
-const CACHE_NAME = "webstart-auto-cache-v3";
+const CACHE_NAME = "webstart-auto-cache";
 const urlsToCache = [
     "/",
     "/index.html",
