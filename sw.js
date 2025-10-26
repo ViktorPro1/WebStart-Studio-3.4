@@ -1,4 +1,5 @@
-const CACHE_NAME = "webstart-auto-cache";
+// 🔥 Автоматичне оновлення - не потрібно нічого міняти вручну
+const CACHE_NAME = `webstart-cache-${self.registration.scope}`;
 const urlsToCache = [
     "/",
     "/index.html",
@@ -63,8 +64,7 @@ const urlsToCache = [
     "/other_styles/ai-automatization.css", "/pages/ai-automatization.html"
 ];
 
-
-// Встановлення SW
+// Встановлення SW - автоматично оновлює кеш
 self.addEventListener("install", event => {
     self.skipWaiting();
     event.waitUntil(
@@ -80,41 +80,45 @@ self.addEventListener("install", event => {
     );
 });
 
-// Активація SW
+// Активація SW - ВИДАЛЯЄ всі старі кеші
 self.addEventListener("activate", event => {
     clients.claim();
     event.waitUntil(
         caches.keys().then(names =>
             Promise.all(
-                names.filter(name => name !== CACHE_NAME)
-                    .map(name => {
+                names.map(name => {
+                    // Видаляємо ВСІ кеші при кожному оновленні
+                    if (name !== CACHE_NAME) {
                         console.log(`🗑️ Видалено старий кеш: ${name}`);
                         return caches.delete(name);
-                    })
+                    }
+                })
             )
-        )
+        ).then(() => {
+            // Повідомляємо всі вкладки про оновлення
+            return self.clients.matchAll().then(clients => {
+                clients.forEach(client => client.postMessage({ type: 'CACHE_UPDATED' }));
+            });
+        })
     );
 });
 
-// 🔥 ВИПРАВЛЕНО: Обробка fetch без повторного клонування
+// Fetch - Network First для фото, Cache First для решти
 self.addEventListener("fetch", event => {
     if (event.request.method !== "GET") return;
 
     const url = new URL(event.request.url);
     if (url.origin !== location.origin) return;
 
-    // Для фото - пріоритет мережі
+    // Для фото - пріоритет мережі (завжди свіжі)
     if (url.pathname.includes('/foto/')) {
         event.respondWith(
             fetch(event.request)
                 .then(response => {
-                    // ✅ Клонуємо ОДРАЗУ після отримання
                     const responseClone = response.clone();
-
                     caches.open(CACHE_NAME)
                         .then(cache => cache.put(event.request, responseClone))
                         .catch(err => console.warn('Помилка кешування фото:', err));
-
                     return response;
                 })
                 .catch(() =>
@@ -128,21 +132,33 @@ self.addEventListener("fetch", event => {
         return;
     }
 
-    // Для інших ресурсів - стандартна стратегія
+    // Для інших ресурсів - Cache First (швидше)
     event.respondWith(
         caches.match(event.request).then(cached => {
-            if (cached) return cached;
+            // Якщо є в кеші - віддаємо, але в фоні оновлюємо
+            if (cached) {
+                // Оновлення в фоні
+                fetch(event.request)
+                    .then(response => {
+                        if (response && response.status === 200) {
+                            const responseClone = response.clone();
+                            caches.open(CACHE_NAME)
+                                .then(cache => cache.put(event.request, responseClone));
+                        }
+                    })
+                    .catch(() => { });
 
+                return cached;
+            }
+
+            // Якщо немає в кеші - завантажуємо
             return fetch(event.request)
                 .then(response => {
-                    // ✅ Перевіряємо чи response валідний
                     if (!response || response.status !== 200 || response.type === 'error') {
                         return response;
                     }
 
-                    // ✅ Клонуємо ОДРАЗУ
                     const responseClone = response.clone();
-
                     caches.open(CACHE_NAME)
                         .then(cache => cache.put(event.request, responseClone))
                         .catch(err => console.warn('Помилка кешування:', err));
