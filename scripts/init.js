@@ -21,7 +21,7 @@ closeBtn.addEventListener('click', () => {
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/scripts/sw.js')
+        navigator.serviceWorker.register('/sw.js')
             .then(reg => console.log('✅ Service Worker зареєстровано', reg.scope))
             .catch(err => console.error('❌ Service Worker помилка:', err));
     });

@@ -7,6 +7,7 @@ const urlsToCache = [
     "/scripts/main.js",
     "/scripts/ui-scroll.js",
     "/scripts/analytics.js",
+    "/scripts/instruction.js",
     "/scripts/init.js",
     "/scripts/pwa-loader.js",
     "/scripts/script.js",
