@@ -4137,3 +4137,52 @@ body.modal-open .help-window {
         font-size: 11px;
     }
 }
+
+/* СТИЛІ ДЛЯ БЛОКУ СОЦІАЛЬНОГО ДОКАЗУ #social-proof */
+#social-proof {
+    position: fixed;
+    bottom: 3cm;
+    /* піднімаємо блок від нижнього краю на 3 см */
+    left: 20px;
+    /* лівий край */
+    max-width: 320px;
+    /* обмеження ширини */
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    font-family: sans-serif;
+    animation: fadein 0.5s;
+    z-index: 9999;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    #social-proof {
+        font-size: 13px;
+        padding: 18px 10px;
+        bottom: 1.5cm;
+        left: 0;
+        right: 6cm;
+        /* сильніше стискаємо по горизонталі */
+        max-width: calc(100% - 6cm);
+    }
+}

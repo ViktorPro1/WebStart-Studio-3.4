@@ -11,6 +11,7 @@ const urlsToCache = [
     "/scripts/init.js",
     "/scripts/calculator.js",
     "/scripts/pwa-loader.js",
+    "/scripts/social-proof.js",
     "/scripts/script.js",
     "/scripts/structured-data.js",
     "/icons/icon-192x192.webp",
