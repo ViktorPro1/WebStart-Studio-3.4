@@ -44,6 +44,56 @@
 <body class="offer-page">
     <h1 class="offer-page-h1">Ми пропонуємо — ви обираєте</h1>
 
+    <!-- Калькулятор вартості -->
+    <section class="offer-page-section" id="calculator">
+        <h2 class="offer-page-h2">Калькулятор вартості</h2>
+
+        <div class="calculator-container">
+            <div class="calculator-group">
+                <label for="service-type">Оберіть тип послуги:</label>
+                <select id="service-type" class="calculator-select">
+                    <option value="">-- Оберіть послугу --</option>
+                    <option value="portfolio">Портфоліо</option>
+                    <option value="resume">Резюме</option>
+                    <option value="sites">Сайти</option>
+                    <option value="adaptive">Адаптація для смартфонів</option>
+                </select>
+            </div>
+
+            <div class="calculator-group" id="service-options" style="display: none;">
+                <label for="service-option">Оберіть варіант:</label>
+                <select id="service-option" class="calculator-select">
+                    <option value="">-- Оберіть варіант --</option>
+                </select>
+            </div>
+
+            <div class="calculator-group" id="additional-options" style="display: none;">
+                <label>Додаткові опції:</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="option-seo" value="200">
+                        SEO оптимізація (+200 грн)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="option-support" value="150">
+                        Технічна підтримка 1 місяць (+150 грн)
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="option-forms" value="100">
+                        Інтеграція форм (+100 грн)
+                    </label>
+                </div>
+            </div>
+
+            <div class="calculator-result" id="result" style="display: none;">
+                <div class="result-label">Загальна вартість:</div>
+                <div class="result-price" id="total-price">0 грн</div>
+            </div>
+
+            <button id="reset-calculator" class="calculator-btn" style="display: none;">Очистити</button>
+        </div>
+    </section>
+
     <section class="offer-page-section" id="portfolio">
         <h2 class="offer-page-h2">Портфоліо</h2>
 
@@ -111,7 +161,7 @@
         </div>
 
         <div class="offer-page-service-item">
-            <strong>Instagram “Taplink” — від 500 грн</strong><br>
+            <strong>Instagram "Taplink" — від 500 грн</strong><br>
             Міні-сайт, який відкривається по посиланню з Instagram. Містить кнопки на всі ваші соцмережі, месенджери,
             послуги чи прайси.
         </div>
@@ -155,6 +205,7 @@
         <a href="../index.html" class="offer-page-btn-link return-home">Повернутись на головну</a>
     </div>
 
+    <script src="../scripts/calculator.js"></script>
 </body>
 
 </html>

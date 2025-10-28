@@ -9,6 +9,7 @@ const urlsToCache = [
     "/scripts/analytics.js",
     "/scripts/instruction.js",
     "/scripts/init.js",
+    "/scripts/calculator.js",
     "/scripts/pwa-loader.js",
     "/scripts/script.js",
     "/scripts/structured-data.js",
