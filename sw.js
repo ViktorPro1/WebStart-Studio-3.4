@@ -14,6 +14,7 @@ const urlsToCache = [
     "/scripts/social-proof.js",
     "/scripts/script.js",
     "/scripts/structured-data.js",
+    "/scripts/exit-intent.js",
     "/icons/icon-192x192.webp",
     "/icons/icon-512x512.webp",
 
