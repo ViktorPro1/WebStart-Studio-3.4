@@ -342,7 +342,7 @@ class ExitIntentManager {
         try {
             await fetch('https://script.google.com/macros/s/AKfycbyj5ZTV2sLCawz3SzuZoDgz_RXkM00oAdi530lULMlMWMJGc0QLwEdiBXLneuColVe1Qw/exec', {
                 method: 'POST',
-                mode: 'no-cors',
+                mode: 'cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     email: email,
