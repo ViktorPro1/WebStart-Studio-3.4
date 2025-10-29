@@ -4553,3 +4553,68 @@ body.modal-open .help-window {
         width: 100%;
     }
 }
+
+@media (max-width: 420px) {
+    .exit-popup-content {
+        padding: 1rem;
+        border-radius: 14px;
+        margin: 0.5rem;
+    }
+
+    .exit-popup-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .exit-emoji {
+        font-size: 2.5rem;
+    }
+
+    .exit-main-text {
+        font-size: 1rem;
+    }
+
+    .exit-sub-text {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .exit-benefit {
+        font-size: 0.9rem;
+        gap: 0.5rem;
+    }
+
+    .benefit-icon {
+        font-size: 1.2rem;
+    }
+
+    .exit-btn-primary {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .exit-timer p {
+        font-size: 1rem;
+    }
+
+    #exit-countdown {
+        font-size: 1.1rem;
+    }
+
+    .promo-code {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    .success-btn-primary,
+    .success-btn-secondary {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.9rem;
+    }
+
+    .exit-popup-close {
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
+    }
+}
