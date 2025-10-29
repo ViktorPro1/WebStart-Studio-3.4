@@ -337,12 +337,12 @@ class ExitIntentManager {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    // Відправка email на сервер
+    // Відправка email на Google Sheets
     async sendEmailToServer(email) {
         try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbyj5ZTV2sLCawz3SzuZoDgz_RXkM00oAdi530lULMlMWMJGc0QLwEdiBXLneuColVe1Qw/exec', {
+            await fetch('https://script.google.com/macros/s/AKfycbyj5ZTV2sLCawz3SzuZoDgz_RXkM00oAdi530lULMlMWMJGc0QLwEdiBXLneuColVe1Qw/exec', {
                 method: 'POST',
-                mode: 'no-cors', // ⬅️ ДОДАЙТЕ ЦЕЙ РЯДОК!
+                mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     email: email,
@@ -352,11 +352,14 @@ class ExitIntentManager {
                 })
             });
 
-            if (response.ok) {
-                console.log('✅ Email відправлено на сервер');
-            }
+            // При no-cors відповідь непрозора, але якщо помилки немає - запит успішний
+            console.log('✅ Email відправлено в Google Sheets');
+            console.log('📧 Користувач:', email);
+
         } catch (error) {
             console.error('❌ Помилка відправки email:', error);
+            // Показуємо помилку користувачу (опціонально)
+            // alert('Помилка з\'єднання. Спробуйте ще раз.');
         }
     }
 
