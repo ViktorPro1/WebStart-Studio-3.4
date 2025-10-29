@@ -342,7 +342,7 @@ class ExitIntentManager {
     // ==========================================
     async sendEmailToServer(email) {
         // URL вашого Apps Script Web App
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyj5ZTV2sLCawz3SzuZoDgz_RXkM00oAdi530lULMlMWMJGc0QLwEdiBXLneuColVe1Qw/exec';
+        const SCRIPT_URL = 'hhttps://script.google.com/macros/s/AKfycbxQbqM7Ny0Yq5FDhkLMJ2bIWKO9p8ZIkS8xExl_9oMqDhNH5jJysD0KLMVPUSfn36lOIQ/exec';
 
         try {
             console.log('📤 Відправка email на сервер...', email);
@@ -403,7 +403,7 @@ class ExitIntentManager {
 
     // Альтернативний метод через GET (якщо POST не працює)
     sendEmailViaGet(email) {
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyj5ZTV2sLCawz3SzuZoDgz_RXkM00oAdi530lULMlMWMJGc0QLwEdiBXLneuColVe1Qw/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQbqM7Ny0Yq5FDhkLMJ2bIWKO9p8ZIkS8xExl_9oMqDhNH5jJysD0KLMVPUSfn36lOIQ/exec';
 
         const params = new URLSearchParams({
             email: email,
