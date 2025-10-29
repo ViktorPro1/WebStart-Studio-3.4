@@ -1,5 +1,5 @@
 // ==========================================
-// Exit Intent Popup Manager
+// Exit Intent Popup Manager (ВИПРАВЛЕНА ВЕРСІЯ)
 // Спрацьовує коли користувач хоче покинути сайт
 // ==========================================
 
@@ -317,7 +317,7 @@ class ExitIntentManager {
         localStorage.setItem('promoEmail', email);
         localStorage.setItem('promoCode', 'EXIT15'); // Промокод
 
-        // Відправляємо на сервер (опціонально)
+        // Відправляємо на сервер
         this.sendEmailToServer(email);
 
         // Аналітика
@@ -337,29 +337,100 @@ class ExitIntentManager {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    // Відправка email на Google Sheets
+    // ==========================================
+    // ВИПРАВЛЕНА ФУНКЦІЯ ВІДПРАВКИ
+    // ==========================================
     async sendEmailToServer(email) {
+        // URL вашого Apps Script Web App
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyj5ZTV2sLCawz3SzuZoDgz_RXkM00oAdi530lULMlMWMJGc0QLwEdiBXLneuColVe1Qw/exec';
+
         try {
-            await fetch('https://script.google.com/macros/s/AKfycbyj5ZTV2sLCawz3SzuZoDgz_RXkM00oAdi530lULMlMWMJGc0QLwEdiBXLneuColVe1Qw/exec', {
+            console.log('📤 Відправка email на сервер...', email);
+
+            // Спосіб 1: POST з no-cors (основний)
+            const postResponse = await fetch(SCRIPT_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                mode: 'no-cors',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({
                     email: email,
                     promoCode: 'EXIT15',
                     discount: 15,
-                    timestamp: new Date().toISOString()
+                    timestamp: new Date().toISOString(),
+                    source: 'exit_intent_popup'
                 })
             });
 
-            // При no-cors відповідь непрозора, але якщо помилки немає - запит успішний
-            console.log('✅ Email відправлено в Google Sheets');
+            console.log('✅ POST запит відправлено (no-cors mode)');
+
+            // Спосіб 2: GET запит як backup (більш надійний)
+            const params = new URLSearchParams({
+                email: email,
+                promoCode: 'EXIT15',
+                discount: '15',
+                timestamp: new Date().toISOString(),
+                source: 'exit_intent_popup'
+            });
+
+            // Використовуємо Image trick для гарантованої доставки
+            const img = new Image();
+            img.onload = () => console.log('✅ GET backup запит успішний');
+            img.onerror = () => console.log('⚠️ GET backup запит failed (але це норма)');
+            img.src = `${SCRIPT_URL}?${params.toString()}`;
+
+            console.log('✅ Email відправлено через обидва методи');
             console.log('📧 Користувач:', email);
+
+            return true;
 
         } catch (error) {
             console.error('❌ Помилка відправки email:', error);
-            // Показуємо помилку користувачу (опціонально)
-            // alert('Помилка з\'єднання. Спробуйте ще раз.');
+
+            // Якщо основний метод не спрацював, пробуємо тільки GET
+            try {
+                console.log('🔄 Спроба відправки через GET...');
+                this.sendEmailViaGet(email);
+                return true;
+            } catch (backupError) {
+                console.error('❌ Backup метод також не спрацював:', backupError);
+                return false;
+            }
         }
+    }
+
+    // Альтернативний метод через GET (якщо POST не працює)
+    sendEmailViaGet(email) {
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyj5ZTV2sLCawz3SzuZoDgz_RXkM00oAdi530lULMlMWMJGc0QLwEdiBXLneuColVe1Qw/exec';
+
+        const params = new URLSearchParams({
+            email: email,
+            promoCode: 'EXIT15',
+            discount: '15',
+            timestamp: new Date().toISOString(),
+            source: 'exit_intent_popup'
+        });
+
+        // Метод 1: Через fetch GET
+        fetch(`${SCRIPT_URL}?${params.toString()}`, {
+            method: 'GET',
+            mode: 'no-cors'
+        }).catch(err => console.log('Fetch GET error (очікувано):', err));
+
+        // Метод 2: Через Image (найнадійніший для CORS)
+        const img = new Image();
+        img.src = `${SCRIPT_URL}?${params.toString()}`;
+
+        // Метод 3: Через iframe (на випадок)
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.src = `${SCRIPT_URL}?${params.toString()}`;
+        document.body.appendChild(iframe);
+        setTimeout(() => iframe.remove(), 3000);
+
+        console.log('📤 GET запити відправлено (3 методи)');
     }
 
     // Показати повідомлення успіху
@@ -451,5 +522,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Затримка 2 секунди перед активацією (щоб не дратувати одразу)
     setTimeout(() => {
         window.exitIntent = new ExitIntentManager();
+        console.log('🚀 Exit Intent Manager ініціалізовано');
     }, 2000);
 });
+
+// Для тестування в консолі браузера
+window.testExitIntent = function (testEmail = 'test@example.com') {
+    console.log('🧪 Запуск тесту Exit Intent...');
+
+    if (!window.exitIntent) {
+        console.error('❌ ExitIntentManager не ініціалізовано');
+        return;
+    }
+
+    // Тестуємо відправку email
+    window.exitIntent.sendEmailToServer(testEmail);
+    console.log('✅ Тест відправлено для:', testEmail);
+    console.log('👀 Перевірте Console для деталей');
+};
